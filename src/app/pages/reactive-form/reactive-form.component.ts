@@ -7,6 +7,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./reactive-form.component.css'],
 })
 export class ReactiveFormComponent {
+
+     
+
   reactiveForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -15,11 +18,11 @@ export class ReactiveFormComponent {
     ]),
     tempaddress: new FormControl('', [
       Validators.required,
-      Validators.minLength(25),
+      Validators.minLength(15),
     ]),
     nativeaddress: new FormControl('', [
       Validators.required,
-      Validators.minLength(25),
+      Validators.minLength(15), Validators.maxLength(50)
     ]),
     zip: new FormControl('', [Validators.required, Validators.minLength(6)]),
     cities: new FormControl('', [Validators.required]),
@@ -28,6 +31,6 @@ export class ReactiveFormComponent {
 
 
   handleSubmit() {
-    console.log(this.reactiveForm.value);
+    console.log("");
   }
 }

@@ -11,6 +11,13 @@
           placeholder="Email"
           formControlName="email"
         />
+
+        <div *ngIf="reactiveForm.controls['email'].invalid && (reactiveForm.controls['email'].touched || reactiveForm.controls['email'].dirty)">
+          <span class="text-danger" *ngIf="reactiveForm.controls['email'].errors?.['required']">Email  is required.</span>
+          <span class="text-danger" *ngIf="reactiveForm.controls['email'].errors?.['email']">email should be in proper format</span>
+
+        
+        </div>
       </div>
       <div class="form-group">
         <label for="inputPassword4">Password</label>
@@ -21,6 +28,12 @@
           placeholder="Password"
           formControlName="password"
         />
+
+        <div *ngIf="reactiveForm.controls['password'].invalid && (reactiveForm.controls['password'].touched || reactiveForm.controls['password'].dirty)">
+          <span class="text-danger" *ngIf="reactiveForm.controls['password'].errors?.['required']">password is required.</span>
+          <span class="text-danger" *ngIf="reactiveForm.controls['password'].errors?.['minlength']">Length Should be 5 digit.</span>
+        </div>
+        
       </div>
     </div>
     <div class="form-group">
@@ -32,6 +45,11 @@
         placeholder="1234 Main St"
         formControlName="tempaddress"
       />
+
+      <div *ngIf="reactiveForm.controls['tempaddress'].invalid && (reactiveForm.controls['tempaddress'].touched || reactiveForm.controls['tempaddress'].dirty)">
+        <span class="text-danger" *ngIf="reactiveForm.controls['tempaddress'].errors?.['required']">tempaddress is required.</span>
+        <span class="text-danger" *ngIf="reactiveForm.controls['tempaddress'].errors?.['minlength']">address should be short 15 chars.</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="inputAddress2">Permanant Address 2</label>
@@ -42,26 +60,29 @@
         placeholder="Apartment, studio, or floor"
         formControlName="nativeaddress"
       />
+
+      <div *ngIf="reactiveForm.controls['nativeaddress'].invalid && (reactiveForm.controls['nativeaddress'].touched || reactiveForm.controls['nativeaddress'].dirty)">
+        <span class="text-danger" *ngIf="reactiveForm.controls['nativeaddress'].errors?.['required']">native address is required.</span>
+        <span class="text-danger" *ngIf="reactiveForm.controls['nativeaddress'].errors?.['minlength']">address should be short 15 to 50 chars.</span>
+        <span class="text-danger" *ngIf="reactiveForm.controls['nativeaddress'].errors?.['maxlength']">address can't be greater than 50 chars.</span>
+
+      </div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label for="inputCity">City</label>
-        <input
-          type="text"
-          class="form-control"
-          name="cities"
-          formControlName="cities"
-        />
-      </div>
+      
       <div class="form-group">
         <label for="inputState">Cities</label>
-        <select name="cities" class="form-control">
-          <option selected>Choose...</option>
-          <option>Bhopal</option>
-          <option>Hyderabad</option>
-          <option>Indore</option>
-          <option>Bangalore</option>
+        <select name="cities" class="form-control" formControlName="cities">
+          <option selected>Choose city</option>
+          <option value="bhopal" >Bhopal</option>
+          <option value="hyderabad">Hyderabad</option>
+          <option value="indore">Indore</option>
+          <option value="Bangalore">Bangalore</option>
         </select>
+      </div>
+
+      <div *ngIf="reactiveForm.controls['cities'].invalid && (reactiveForm.controls['cities'].touched || reactiveForm.controls['cities'].dirty)">
+        <span class="text-danger" *ngIf="reactiveForm.controls['cities'].errors?.['required']">please choose city.</span>
       </div>
       <div class="form-group col-md-2">
         <label for="inputZip">Zip</label>
@@ -71,11 +92,18 @@
           name="zip"
           formControlName="zip"
         />
+
+        <div *ngIf="reactiveForm.controls['zip'].invalid && (reactiveForm.controls['zip'].touched || reactiveForm.controls['zip'].dirty)">
+          <span class="text-danger" *ngIf="reactiveForm.controls['zip'].errors?.['minlength']">Zip code 6 digits only </span>
+          <span class="text-danger" *ngIf="reactiveForm.controls['zip'].errors?.['required']">zip code required </span>
+
+        </div>
       </div>
     </div>
     <div class="form-group">
       <div class="form-check"></div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" [disabled]="reactiveForm.invalid" class="btn btn-primary">Submit</button>
+       <!-- if form status and form fields invalid  button should be disabled -->
   </form>
 </div>
